@@ -258,33 +258,27 @@ export default function App() {
   );
 }
 
+// ✅ FIX: Checklist now reads/writes state.checklist[TODAY] via onUpdate
+// so every toggle is debounce-saved to Supabase automatically.
 function ChecklistPage({ state, onUpdate }) {
   const cfg = state.settings || {};
   const closes = cfg.close1 || 12;
   const gci = cfg.gci1 || 75000;
   const TODAY = new Date().toISOString().split("T")[0];
-  const CL_KEY = "mrea_cl_" + TODAY;
 
-  const [done, setDone] = React.useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem(CL_KEY) || "{}");
-    } catch (e) {
-      return {};
-    }
-  });
+  // checklist is keyed by date: { "2025-06-01": { p1: true, l3: true, ... }, ... }
+  const allChecklist = state.checklist || {};
+  const done = allChecklist[TODAY] || {};
 
   function toggle(id) {
-    const u = { ...done, [id]: !done[id] };
-    setDone(u);
-    try {
-      localStorage.setItem(CL_KEY, JSON.stringify(u));
-    } catch (e) {}
+    const updated = { ...done, [id]: !done[id] };
+    const newChecklist = { ...allChecklist, [TODAY]: updated };
+    onUpdate({ ...state, checklist: newChecklist });
   }
+
   function reset() {
-    setDone({});
-    try {
-      localStorage.removeItem(CL_KEY);
-    } catch (e) {}
+    const newChecklist = { ...allChecklist, [TODAY]: {} };
+    onUpdate({ ...state, checklist: newChecklist });
   }
 
   const GROUPS = [
