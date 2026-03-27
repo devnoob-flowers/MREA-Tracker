@@ -1,5 +1,5 @@
 const SUPABASE_URL = "https://acuwwbhjrgvwjbcdiytw.supabase.co";
-const SUPABASE_KEY = "sb_publishable_fx0HsVRgwKnlqpbX_eg2AQ_pAdClyYV";
+const SUPABASE_KEY = "ssb_secret_9nBREsm0YDJEsNBaxSrXNg_FDR9NsYS";
 
 const USER_ID = "my-mrea-tracker";
 
@@ -64,6 +64,6 @@ export async function saveToCloud(state) {
 export function isConfigured() {
   return (
     SUPABASE_URL !== "https://acuwwbhjrgvwjbcdiytw.supabase.co" &&
-    SUPABASE_KEY !== "sb_publishable_fx0HsVRgwKnlqpbX_eg2AQ_pAdClyYV"
+    SUPABASE_KEY !== "ssb_secret_9nBREsm0YDJEsNBaxSrXNg_FDR9NsYS"
   );
 }
