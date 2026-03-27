@@ -52,7 +52,11 @@ export async function saveToCloud(state) {
     };
     await fetch(`${TABLE_URL}?user_id=eq.${USER_ID}`, {
       method: "PATCH",
-      headers: HEADERS,
+      headers: {
+        "Content-Type": "application/json",
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+      },
       body: JSON.stringify(payload),
     });
   } catch (e) {
