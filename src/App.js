@@ -44,7 +44,9 @@ function useDebounce(fn, delay) {
 }
 
 export default function App() {
-  const [activePage, setActivePage] = useState("overview");
+  const [activePage, setActivePage] = useState(
+    () => localStorage.getItem("mrea_active_page") || "overview",
+  );
   const [state, setState] = useState(() => loadState());
   const [syncStatus, setSyncStatus] = useState("idle");
   const [loaded, setLoaded] = useState(false);
@@ -231,7 +233,10 @@ export default function App() {
           <button
             key={item.id}
             className={`nav-btn${activePage === item.id ? " active" : ""}`}
-            onClick={() => setActivePage(item.id)}
+            onClick={() => {
+              setActivePage(item.id);
+              localStorage.setItem("mrea_active_page", item.id);
+            }}
           >
             {item.label}
           </button>
