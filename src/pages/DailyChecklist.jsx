@@ -44,33 +44,60 @@ export default function ChecklistPage({ state, onUpdate }) {
   // ─────────────────────────────────────────────────────────────────────────
   const GROUPS = [
     {
+      id: "mindset",
+      title: "Mind & motivation — do this before anything else",
+      color: "#e879f9",
+      tasks: [
+        {
+          id: "ms1",
+          text: "Read your why statement out loud — remember why you're building this",
+          tag: "mindset",
+        },
+        {
+          id: "ms2",
+          text: "Say your daily affirmations out loud — speak it before you seek it",
+          tag: "mindset",
+        },
+        {
+          id: "ms3",
+          text: "Visualize your ideal day — what does a win look like today?",
+          tag: "mindset",
+        },
+        {
+          id: "ms4",
+          text: `Review your yearly goal — $${Math.round(gci / 1000)}K GCI, ${closes} closings`,
+          tag: "mindset",
+        },
+      ],
+    },
+    {
       id: "power",
       title: "Power hour — do this first",
       color: "#2563eb",
       tasks: [
         {
           id: "p1",
-          text: "Read your why statement out loud — remember why you're doing this",
+          text: "Call 5 people from your database — Prioritize warm leads, past clients, and sphere of influence. Goal: at least 1 meaningful conversation",
           tag: "daily",
         },
         {
           id: "p2",
-          text: "Make 5 database calls — past clients, sphere, or farm area",
+          text: "Follow up on all active leads — Anyone who hasn't heard from you in 3+ days gets a call or text today. Check your MREA Tracker lead funnel",
           tag: "daily",
         },
         {
           id: "p3",
-          text: "Send 3 personal texts to your top 20 contacts",
+          text: "Send 3 personal outreach messages — Text, handwritten note, or video message. Not a mass blast — something personal. Referrals come from relationships",
           tag: "lead",
         },
         {
           id: "p4",
-          text: "Open KW Command — check for new leads and messages",
+          text: "Add 2 new contacts to your database — Anyone you met, connected with, or thought of. Name, number, source. Growth fuels the funnel",
           tag: "daily",
         },
         {
           id: "p5",
-          text: "Follow up every lead from yesterday — no lead goes cold overnight",
+          text: "Set or confirm 1 appointment — Buyer consult, listing presentation, coffee meeting, or phone call. An appointment on the calendar = momentum",
           tag: "lead",
         },
       ],
