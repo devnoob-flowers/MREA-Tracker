@@ -299,7 +299,7 @@ function ChecklistPage({ state, onUpdate }) {
         },
         {
           id: "p2",
-          text: "Make 5 database calls before opening email or social media",
+          text: "Make 5 database calls — past clients, sphere, or farm area",
           tag: "daily",
         },
         {
@@ -352,24 +352,24 @@ function ChecklistPage({ state, onUpdate }) {
       ],
     },
     {
-      id: "farm",
-      title: "Farm system — Panorama Village (12 Direct)",
+      id: "Social Media",
+      title: "Social Media — build your personal brand and farm your area",
       color: "#0d9488",
       tasks: [
         {
-          id: "f1",
-          text: "Check HAR.com for new listings or sales in Panorama Village",
-          tag: "farm",
+          id: "s1",
+          text: "5/5/5 check — 5 Likes, 5 comments, 5 shares / DMs to engage with your audience",
+          tag: "Daily",
         },
         {
-          id: "f2",
-          text: `Confirm this month's farm mailer is scheduled (${cfg.farm || 200} homes)`,
-          tag: "farm",
+          id: "s2",
+          text: `Post 1 Piece of Content — market update, local stat, or client win. This builds your personal brand and farms your area over time.`,
+          tag: "Daily",
         },
         {
-          id: "f3",
-          text: "If hosting open house today — collect every visitor contact",
-          tag: "farm",
+          id: "s3",
+          text: "Plan Social Content for the week — batch content creation is more efficient and effective",
+          tag: "Daily",
         },
       ],
     },
