@@ -23,7 +23,7 @@ const TARGETS = {
   weeklyCalls: 25,
   annualCalls: 1300,
   annualOH: 24,
-  annualLeads: 50,
+  annualLeads: 200,
   annualAppts: 25,
 };
 

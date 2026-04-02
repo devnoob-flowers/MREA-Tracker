@@ -1,9 +1,61 @@
 // ── DAILY CHECKLIST PAGE ──
-// Extracted from App.jsx for easier editing.
-// To add/remove tasks: find the GROUPS array below and edit the tasks arrays.
-// To add a new group: add a new object to GROUPS following the same shape.
+import React, { useState } from "react";
 
-import React from "react";
+const AFFIRMATIONS = [
+  {
+    emoji: "🏡",
+    text: "I am building a real estate business that gives my family financial freedom and time together.",
+  },
+  {
+    emoji: "🏡",
+    text: "Every call I make moves me one step closer to full-time.",
+  },
+  {
+    emoji: "🏡",
+    text: "I attract clients who trust me, value me, and refer me to others.",
+  },
+  {
+    emoji: "🏡",
+    text: "My database is growing every day, and so is my income.",
+  },
+  {
+    emoji: "🏡",
+    text: "I follow my MREA plan with discipline — the results take care of themselves.",
+  },
+  {
+    emoji: "💪",
+    text: "Rejection is redirection. Every 'no' brings me closer to a 'yes.'",
+  },
+  {
+    emoji: "💪",
+    text: "I show up consistently, even when it's hard — that's what separates me.",
+  },
+  {
+    emoji: "💪",
+    text: "I am becoming the agent I've always known I could be.",
+  },
+  {
+    emoji: "💪",
+    text: "Progress, not perfection. I take one more step forward today.",
+  },
+  {
+    emoji: "👨‍👩‍👧‍👦",
+    text: "I am building this business so I never miss the moments that matter most.",
+  },
+  { emoji: "👨‍👩‍👧‍👦", text: "My work today is a gift to my family's future." },
+  {
+    emoji: "👨‍👩‍👧‍👦",
+    text: "Being present for my family is my greatest motivation and my greatest reward.",
+  },
+  {
+    emoji: "🌅",
+    text: "Today I will lead generate, lead nurture, and lead convert — one conversation at a time.",
+  },
+  {
+    emoji: "🌅",
+    text: "I am a full-time agent in the making. My part-time effort today is my full-time life tomorrow.",
+  },
+];
 
 export default function ChecklistPage({ state, onUpdate }) {
   const cfg = state.settings || {};
@@ -11,7 +63,10 @@ export default function ChecklistPage({ state, onUpdate }) {
   const gci = cfg.gci1 || 75000;
   const TODAY = new Date().toISOString().split("T")[0];
 
-  // checklist is keyed by date: { "2025-06-01": { p1: true, l3: true, ... }, ... }
+  const [affirmation] = useState(
+    () => AFFIRMATIONS[Math.floor(Math.random() * AFFIRMATIONS.length)],
+  );
+
   const allChecklist = state.checklist || {};
   const done = allChecklist[TODAY] || {};
 
@@ -26,22 +81,6 @@ export default function ChecklistPage({ state, onUpdate }) {
     onUpdate({ ...state, checklist: newChecklist });
   }
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // TASK GROUPS — edit here to add, remove, or reorder tasks.
-  //
-  // Each group has:
-  //   id     — unique string, used as a React key
-  //   title  — section heading shown in the UI
-  //   color  — progress bar color (hex or CSS var)
-  //   tasks  — array of { id, text, tag }
-  //
-  // Each task has:
-  //   id   — unique string across ALL groups (e.g. "p1", "lg1")
-  //   text — the task description shown in the checklist
-  //   tag  — label badge: "daily" | "lead" | "farm" | "goal" | "money"
-  //
-  // To add a new tag color, add it to the TAG map below.
-  // ─────────────────────────────────────────────────────────────────────────
   const GROUPS = [
     {
       id: "mindset",
@@ -61,11 +100,6 @@ export default function ChecklistPage({ state, onUpdate }) {
         {
           id: "ms3",
           text: "Visualize your ideal day — what does a win look like today?",
-          tag: "mindset",
-        },
-        {
-          id: "ms4",
-          text: `Review your yearly goal — $${Math.round(gci / 1000)}K GCI, ${closes} closings`,
           tag: "mindset",
         },
       ],
@@ -135,9 +169,6 @@ export default function ChecklistPage({ state, onUpdate }) {
       ],
     },
     {
-      // ── MREA DAILY LEAD GEN (Gary Keller framework) ──────────────────────
-      // The 5 tasks below come directly from Keller's MREA model.
-      // Edit the text fields freely — IDs must stay unique.
       id: "mrea_leadgen",
       title: "MREA lead gen — Keller's 5 daily disciplines",
       color: "#e55c3a",
@@ -220,16 +251,13 @@ export default function ChecklistPage({ state, onUpdate }) {
     },
   ];
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // TAG COLORS — add new tags here if you create new task categories.
-  // Shape: { bg: string, color: string }
-  // ─────────────────────────────────────────────────────────────────────────
   const TAG = {
     daily: { bg: "rgba(37,99,235,.15)", color: "#93c5fd" },
     lead: { bg: "rgba(201,168,76,.15)", color: "#e8c97a" },
     farm: { bg: "rgba(13,148,136,.15)", color: "#2dd4bf" },
     goal: { bg: "rgba(22,163,74,.15)", color: "#4ade80" },
     money: { bg: "rgba(124,58,237,.15)", color: "#c4b5fd" },
+    mindset: { bg: "rgba(232,121,249,.15)", color: "#f0abfc" },
   };
 
   const allTasks = GROUPS.flatMap((g) => g.tasks);
@@ -324,13 +352,19 @@ export default function ChecklistPage({ state, onUpdate }) {
             prog: pct,
           },
           {
-            val: `${(state.closings || []).length}/${closes}`,
+            val: `${(state.closings || []).filter((c) => !c.side?.startsWith("Rental")).length}/${closes}`,
             lbl: "Closings this year",
             color: "#4ade80",
             cls: "green",
             prog: Math.min(
               100,
-              Math.round(((state.closings || []).length / closes) * 100),
+              Math.round(
+                ((state.closings || []).filter(
+                  (c) => !c.side?.startsWith("Rental"),
+                ).length /
+                  closes) *
+                  100,
+              ),
             ),
           },
           {
@@ -362,7 +396,7 @@ export default function ChecklistPage({ state, onUpdate }) {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          marginBottom: 18,
+          marginBottom: 12,
         }}
       >
         <div style={{ fontSize: 14, fontWeight: 500, color: "var(--text)" }}>
@@ -387,6 +421,43 @@ export default function ChecklistPage({ state, onUpdate }) {
         >
           Reset today
         </button>
+      </div>
+
+      {/* ── DAILY AFFIRMATION — sits just above the task groups ── */}
+      <div
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(232,121,249,.08), rgba(139,92,246,.08))",
+          border: "1px solid rgba(232,121,249,.2)",
+          borderRadius: 14,
+          padding: "14px 20px",
+          marginBottom: 20,
+          textAlign: "center",
+        }}
+      >
+        <div
+          style={{
+            fontSize: 10,
+            fontWeight: 600,
+            textTransform: "uppercase",
+            letterSpacing: ".08em",
+            color: "#e879f9",
+            marginBottom: 6,
+          }}
+        >
+          {affirmation.emoji} Daily Affirmation
+        </div>
+        <div
+          style={{
+            fontFamily: "var(--font-serif)",
+            fontSize: 15,
+            fontStyle: "italic",
+            color: "#f0abfc",
+            lineHeight: 1.6,
+          }}
+        >
+          "{affirmation.text}"
+        </div>
       </div>
 
       {/* ── TASK GROUPS ── */}
