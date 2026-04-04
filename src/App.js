@@ -1,7 +1,7 @@
 // ── MREA TRACKER — MAIN APP (with Supabase cloud sync) ──
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { loadState, saveState } from "./utils/store";
+import { loadState, saveState, DEFAULTS } from "./utils/store";
 import { loadFromCloud, saveToCloud, isConfigured } from "./utils/supabase";
 
 import OverviewPage from "./pages/Overview";
@@ -61,7 +61,17 @@ export default function App() {
       }
       setSyncStatus("saving");
       const cloudData = await loadFromCloud();
-      if (cloudData) setState((prev) => ({ ...prev, ...cloudData }));
+      if (cloudData) {
+        // Always apply updated DEFAULTS over stale cloud settings
+        const mergedSettings = { ...cloudData.settings, ...DEFAULTS, ...(cloudData.settings || {}) };
+        // Force-correct the specific fields we updated
+        mergedSettings.close1 = DEFAULTS.close1;
+        mergedSettings.close3 = DEFAULTS.close3;
+        mergedSettings.split = DEFAULTS.split;
+        mergedSettings.price3 = DEFAULTS.price3;
+        mergedSettings.tc = DEFAULTS.tc;
+        setState((prev) => ({ ...prev, ...cloudData, settings: mergedSettings }));
+      }
       setLoaded(true);
       setSyncStatus("saved");
     }
