@@ -15,18 +15,18 @@ export const DEFAULTS = {
 
   // Year 1 targets
   gci1: 75000,
-  close1: 12,
+  close1: 8,
   price: 300000,
   comm: 3,
 
   // Year 3 targets
   gci3: 150000,
-  close3: 28,
-  price3: 320000,
-  tc: 18000,
+  close3: 17,
+  price3: 300000,
+  tc: 0,
 
   // Financial assumptions
-  split: 20, // Brokerage split %
+  split: 26, // Brokerage split % (KW actual)
   exp: 33, // Business expenses as % of net GCI
   tax: 25, // Self-employment tax %
 
@@ -35,9 +35,9 @@ export const DEFAULTS = {
   farm: 200, // Target farm homes
 
   // Funnel targets
-  leads: 50,
-  appts: 25,
-  contracts: 15,
+  leads: 80,
+  appts: 16,
+  contracts: 13,
 
   // Daily targets
   dailyCalls: 5,
@@ -336,11 +336,11 @@ export const GOAL_DEFAULTS = {
   ],
   year: [
     { id: "y1", text: "Go full-time in real estate", done: false },
-    { id: "y2", text: "Close 12 transactions", done: false },
+    { id: "y2", text: "Close 8 transactions", done: false },
     { id: "y3", text: "Hit $75K gross GCI", done: false },
     { id: "y4", text: "Build database to 100+ contacts", done: false },
     { id: "y5", text: "Farm 200 homes with 12 Direct system", done: false },
-    { id: "y6", text: "Generate 50+ leads from all sources", done: false },
+    { id: "y6", text: "Generate 80+ leads from all sources", done: false },
   ],
 };
 
@@ -350,60 +350,60 @@ export const SCALE_MODEL = [
   {
     year: "Year 1",
     label: "now",
-    closings: 12,
+    closings: 8,
     price: 300000,
-    gross: 84000,
-    net: 67000,
-    exp: 22000,
-    take: 34000,
+    gross: 72000,
+    net: 53000,
+    exp: 21000,
+    take: 38000,
     team: "Solo",
     unlock: "Go full-time. Build database & farm.",
   },
   {
     year: "Year 2",
     label: "",
-    closings: 20,
-    price: 310000,
-    gross: 124000,
-    net: 99000,
-    exp: 33000,
-    take: 50000,
+    closings: 12,
+    price: 300000,
+    gross: 108000,
+    net: 80000,
+    exp: 31000,
+    take: 56000,
     team: "Solo",
     unlock: "Referrals compound. Farm producing.",
   },
   {
     year: "Year 3",
     label: "",
-    closings: 28,
-    price: 320000,
-    gross: 197000,
-    net: 157000,
-    exp: 62000,
-    take: 72000,
+    closings: 17,
+    price: 300000,
+    gross: 153000,
+    net: 113000,
+    exp: 44000,
+    take: 82000,
     team: "+ Part-time TC",
     unlock: "Hire TC. Double database to 200.",
   },
   {
     year: "Year 4",
     label: "",
-    closings: 38,
-    price: 330000,
-    gross: 252000,
-    net: 201000,
-    exp: 85000,
-    take: 87000,
+    closings: 40,
+    price: 310000,
+    gross: 372000,
+    net: 275000,
+    exp: 110000,
+    take: 165000,
     team: "TC + Buyer Spec.",
     unlock: "Add buyer specialist. 3 farms.",
   },
   {
     year: "Year 5",
     label: "",
-    closings: 50,
-    price: 340000,
-    gross: 340000,
-    net: 272000,
-    exp: 110000,
-    take: 122000,
+    closings: 111,
+    price: 320000,
+    gross: 1066000,
+    net: 789000,
+    exp: 375000,
+    take: 410000,
     team: "Full team",
     unlock: "Net a Million stage begins.",
   },
