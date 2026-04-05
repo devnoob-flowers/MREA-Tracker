@@ -136,38 +136,7 @@ export default function ChecklistPage({ state, onUpdate }) {
         },
       ],
     },
-    {
-      id: "leads",
-      title: `Lead generation — 125 leads needed for ${closes} closings`,
-      color: "#c9a84c",
-      tasks: [
-        {
-          id: "l1",
-          text: `Log all new leads in KW Command — need 125 this year for ${closes} closings`,
-          tag: "lead",
-        },
-        {
-          id: "l2",
-          text: "Post 1 piece of content — market update, local stat, or client win",
-          tag: "daily",
-        },
-        {
-          id: "l3",
-          text: "Add any new contacts from today to your CRM database",
-          tag: "daily",
-        },
-        {
-          id: "l4",
-          text: 'Ask 1 person for a referral — "Do you know anyone thinking of moving?"',
-          tag: "lead",
-        },
-        {
-          id: "l5",
-          text: "Update every active lead status in your pipeline",
-          tag: "daily",
-        },
-      ],
-    },
+
     {
       id: "mrea_leadgen",
       title: "MREA lead gen — Keller's 5 daily disciplines",
